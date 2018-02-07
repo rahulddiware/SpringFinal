@@ -4,17 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- Configure DataSource -->
-	<bean id="cpds" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="user" value="system" />
-		<property name="password" value="manager" />
-		<property name="initialPoolSize" value="10" />
-		<property name="maxPoolSize" value="200" />
+	<bean id="jofb" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<!-- <property name="jndiName" value="DsJndi"/> for other server -->
+		<property name="jndiName" value="java:/comp/env/DsJndi" /> <!-- fot tomcat -->
 	</bean>
 	<bean id="template" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="cpds" />
+		<property name="dataSource" ref="jofb" />
 	</bean>
 	<bean id="empDAO" class="com.rd.dao.EmployeeSearchDAOImpl">
 		<property name="jt" ref="template" />
