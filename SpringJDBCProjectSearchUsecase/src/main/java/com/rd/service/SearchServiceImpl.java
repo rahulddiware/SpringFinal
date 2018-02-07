@@ -3,21 +3,20 @@ package com.rd.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rd.dao.EmployeeSerchDAO;
-@Service("empService")
-public class EmployeeSearchServiceImpl implements EmployeeSearchService {
-	private EmployeeSerchDAO dao;
+import com.rd.dao.SearchDAO;
 
-	public void setDao(EmployeeSerchDAO dao) {
-		this.dao = dao;
-	}
+@Service("searchService")
+public class SearchServiceImpl implements SearchService {
+	@Autowired
+	private SearchDAO dao;
 
 	@Override
 	public List<Map<String, Object>> findEmpsByDesg(String[] desg) {
-		List<Map<String, Object>> list = null;
 		String cond = null;
+		List<Map<String, Object>> list = null;
 		// Convert desg[] into condition as required for the SQL Query
 		cond = "(";
 		for (int i = 0; i < desg.length; ++i) {
@@ -27,9 +26,9 @@ public class EmployeeSearchServiceImpl implements EmployeeSearchService {
 				cond = cond + "'" + desg[i] + "',";
 		}
 		// use DAO class
-		list = dao.SearchEmployeeByDesg(cond);
+		list = dao.searchByDesg(cond);
 		return list;
 
-	}
+	}// findEmpsByDesg
 
-}
+}// class
