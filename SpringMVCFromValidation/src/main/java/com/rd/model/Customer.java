@@ -6,6 +6,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.rd.validation.CourseCode;
+
 public class Customer {
 	@NotNull(message = "Must not Empty")
 	private String firstName;
@@ -21,6 +23,8 @@ public class Customer {
 	@NotNull(message = "Must not Empty")
 	@Pattern(regexp = "^[0-9]{6}", message = "must be six digit postal code")
 	private String postalCode;
+	@CourseCode
+	private String courseCode;
 
 	public String getFirstName() {
 		return firstName;
@@ -62,6 +66,12 @@ public class Customer {
 		this.postalCode = postalCode;
 	}
 
+	public String getCourseCode() {
+		return courseCode;
+	}
 
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
+	}
 
 }
