@@ -18,7 +18,8 @@ public class Customer {
 	@Max(value = 10, message = "must be less than 10")
 	@NotNull(message = "Must not Empty")
 	private Integer freePasses;
-	@Pattern(regexp = "^[0-9]{6}",message="must be six digit postal code")
+	@NotNull(message = "Must not Empty")
+	@Pattern(regexp = "^[0-9]{6}", message = "must be six digit postal code")
 	private String postalCode;
 
 	public String getFirstName() {
@@ -60,5 +61,7 @@ public class Customer {
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
+
+
 
 }
